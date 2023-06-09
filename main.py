@@ -8,12 +8,12 @@ from datetime import datetime, timedelta
 async def request(url: str):
     async with aiohttp.ClientSession() as session:
         try:
-            async with session.get(url) as resp:
-                if resp.status == 200:
-                    result = await resp.json()
+            async with session.get(url) as responce:
+                if responce.status == 200:
+                    result = await responce.json()
                     return result
                 else:
-                    print(f"Error status: {resp.status} for {url}")
+                    print(f"Error status: {responce.status} for {url}")
         except aiohttp.ClientConnectorError as err:
             print(f'Connection error: {url}', str(err))
 
@@ -50,13 +50,14 @@ if __name__ == '__main__':
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     while True:
         try:
-            days = input("How many days you want to see? ")
+            days = input("How many days to show the exchange rate? (Max 10 days): ")
             if days in ["exit", "cancel"]:
                 break
             days = 10 if int(days) > 10 else 1 if int(days) <= 0 else int(days)
             break
         except:
-            print("Please type a number")
+            print("Please enter a number")
             continue
     r = asyncio.run(main(days))
     print(r)
+    
