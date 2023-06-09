@@ -56,7 +56,7 @@ if __name__ == '__main__':
             days = 10 if int(days) > 10 else 1 if int(days) <= 0 else int(days)
             break
         except:
-            print("Please enter a number")
+            print("Please enter a number.")
             continue
     r = asyncio.run(main(days))
     print(r)
